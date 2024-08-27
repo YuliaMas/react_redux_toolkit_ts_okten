@@ -4,7 +4,7 @@ import {
     loadPokemonById,
     loadPokemonByName,
     loadPokemonByUrl,
-    loadPokemons,
+    loadPokemons, loadPokemonsByAbility,
     loadPokemonsByType
 } from "../reducers/loadPokemons";
 import {PokemonSliceType} from "../../types";
@@ -40,7 +40,8 @@ const pokemonInitState: PokemonSliceType = {
     previous: null,
     count: 0,
     offset: 0,
-    pokemonType: {pokemon: []}
+    pokemonType: {pokemon: []},
+    pokemonAbility: {pokemon: []}
 }
 export const pokemonSlice = createSlice({
     name: "pokemonSlice",
@@ -62,12 +63,10 @@ export const pokemonSlice = createSlice({
         },
         prevPage:(state, action:PayloadAction<number>)=>{
             console.log(state.pageNumber);
-            // state.offset = state.offset - action.payload;
             state.pageNumber = state.pageNumber-1;
         } ,
         nextPage:(state, action:PayloadAction<number>)=>{
             console.log(state.pageNumber);
-            // state.offset = state.offset + action.payload;
             state.pageNumber = state.pageNumber+1;
         }
     },
@@ -83,7 +82,6 @@ export const pokemonSlice = createSlice({
             })
             .addCase(getPokemons.fulfilled, (state, action) => {
                 console.log(state.pokemonsAll);
-                // console.log(state.data);
                 state.pokemonsAll= action.payload;
             })
             // .addCase(getPokemonData.fulfilled, (state, action) => {
@@ -98,13 +96,16 @@ export const pokemonSlice = createSlice({
                 console.log(state.pokemonType);
                 state.pokemonType = action.payload;
             })
+            .addCase(loadPokemonsByAbility.fulfilled, (state, action) => {
+                console.log(state.pokemonAbility);
+                state.pokemonAbility = action.payload;
+            })
             .addCase(loadPokemons.fulfilled, (state, action) => {
-                // state.allPokemons = action.payload;
                 console.log(state.pokemons);
                 state.pokemons = action.payload;
             })
             .addCase(loadPokemons.rejected, (state, action) => {})
-            .addMatcher(isFulfilled(loadPokemons, loadPokemonById , loadPokemonByUrl, loadPokemonByName, getPokemons, loadPokemonsByType) , (state, action) => {
+            .addMatcher(isFulfilled(loadPokemons, loadPokemonById , loadPokemonByUrl, loadPokemonByName, getPokemons, loadPokemonsByType, loadPokemonsByAbility) , (state, action) => {
                 state.isLoaded = true;
             })
     }
@@ -120,5 +121,6 @@ export const pokemonActions = {
     // getPokemonData,
     loadPokemonByName,
     getPokemons,
-    loadPokemonsByType
+    loadPokemonsByType,
+    loadPokemonsByAbility
 };

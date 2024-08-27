@@ -1,17 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../redux/store";
-import {loadPokemonByName, loadPokemonsByType} from "../redux/reducers/loadPokemons";
-import FavoriteComponent from "./FavoriteComponent";
-import {Link, useNavigate, useSearchParams} from "react-router-dom";
+import {loadPokemonsByType} from "../redux/reducers/loadPokemons";
 import ImageComponent from "./ImageComponent";
 
 const TypeFilterComponent = () => {
-    const params = useSearchParams();
-    console.log(params);
         const [type, setType] = useState<string>(' ');
         const pokemonType= useAppSelector(state => state.pokemonSlice.pokemonType);
     console.log(pokemonType.pokemon);
-    // console.log(pokemon);
         const submitTypeFilterHandler = () => {
             setType('');
         }
@@ -24,13 +19,13 @@ const TypeFilterComponent = () => {
         return (
             <div>
                 <div>
-                    <form id={"filterAbilityForm"} name={'pokemon'} onSubmit={(e) => {
+                    <form id={"filterTypeForm"} name={'pokemon'} onSubmit={(e) => {
                         e.preventDefault();
                         dispatch(loadPokemonsByType(type.trim().toLowerCase()));
                     }}>
                         <input
                             className="py-2 pl-10 md:pr-24 lg:pr-48  w-1/2 text-sm rounded-2xl bg-blue-400 text-gray-800 placeholder-gray-500 appearance-none focus:outline-none focus:font-medium focus:border-gray-900"
-                            placeholder={"Enter a pokemon name..."}
+                            placeholder={"Enter a pokemon type..."}
                             value={type}
                             onKeyPress={(e: React.KeyboardEvent) => {
                                 if (e.key === "Enter") {
@@ -53,7 +48,6 @@ const TypeFilterComponent = () => {
                         <li key={p.pokemon.name} className={"w-1/3"}>
                             <ImageComponent {...p.pokemon}/>
                         </li>
-
                       )
                     )}
                 </ul>

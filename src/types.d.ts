@@ -12,9 +12,14 @@ type PokemonFilterType = {
     pokemon: FilterType[]
 }
 
+type PokemonFilterAbility= {
+    pokemon: FilterType[]
+}
+
 type FilterType = {
     pokemon: IGenericPokemonType;
-    slot: number
+    slot: number,
+    is_hidden?: boolean
 }
 
 type IPokemonType = {
@@ -44,7 +49,8 @@ type PokemonSliceType = {
     previous: null | string,
     count: number,
     offset : number,
-    pokemonType: { pokemon: FilterType[] }
+    pokemonType: { pokemon: FilterType[] },
+    pokemonAbility: { pokemon: FilterType[] }
 }
 
 type ImageData = {

@@ -120,4 +120,17 @@ export const loadPokemonsByType = createAsyncThunk(
         }
     }
 );
+export const loadPokemonsByAbility = createAsyncThunk(
+    "pokemonSlice/loadPokemonsByAbility",
+    async (endpoint:string, thunkAPI) => {
+        try{
+            const pokemonsAbility = await pokemonService.getPokemonsFilterByAbility(endpoint);
+            console.log(pokemonsAbility);
+            return thunkAPI.fulfillWithValue(pokemonsAbility);
+        } catch (e){
+            let error = e as AxiosError;
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
 

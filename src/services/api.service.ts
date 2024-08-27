@@ -1,6 +1,13 @@
 import axios from "axios";
 import {baseUrl, urls} from "../constants/urls";
-import {IGenericPokemonType, IPokemonData, ISprites, NamedAPIResourceList, PokemonFilterType} from "../types";
+import {
+    IGenericPokemonType,
+    IPokemonData,
+    ISprites,
+    NamedAPIResourceList,
+    PokemonFilterAbility,
+    PokemonFilterType
+} from "../types";
 
 const axiosInstance = axios.create({
     baseURL: baseUrl,
@@ -45,6 +52,11 @@ export const pokemonService = {
     },
     getPokemonsFilterByType: async (endpoint:string): Promise<PokemonFilterType> => {
         const response = await axiosInstance.get(urls.pokemons.type(endpoint));
+        console.log(response.data);
+        return response.data;
+    },
+    getPokemonsFilterByAbility: async (endpoint:string): Promise<PokemonFilterAbility> => {
+        const response = await axiosInstance.get(urls.pokemons.ability(endpoint));
         console.log(response.data);
         return response.data;
     }

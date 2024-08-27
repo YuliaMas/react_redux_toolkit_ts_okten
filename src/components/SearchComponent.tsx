@@ -52,7 +52,6 @@ const SearchComponent = () => {
                         </Link>
                     </div>)
                 }
-            <hr/>
         </div>
     );
 };

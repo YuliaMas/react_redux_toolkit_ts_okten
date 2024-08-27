@@ -6,9 +6,13 @@ import TypeFilterComponent from "../components/TypeFilterComponent";
 const SearchPage = () => {
     return (
         <div className={"min-h-screen text-center"}>
+            <hr/>
             <SearchComponent/>
-            {/*<AbilityFilterComponent/>*/}
+            <hr/>
             <TypeFilterComponent/>
+            <hr/>
+            <AbilityFilterComponent/>
+            <hr/>
         </div>
     );
 };
