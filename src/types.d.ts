@@ -8,6 +8,15 @@ export interface IGenericPokemonType {
     url: string;
 }
 
+type PokemonFilterType = {
+    pokemon: FilterType[]
+}
+
+type FilterType = {
+    pokemon: IGenericPokemonType;
+    slot: number
+}
+
 type IPokemonType = {
     abilities: IAbilities[],
     base_experience: number | null,
@@ -35,9 +44,7 @@ type PokemonSliceType = {
     previous: null | string,
     count: number,
     offset : number,
-    // data: AxiosResponse<unknown, any> | IPokemonType[] | undefined,
-    // pokemonImage: IPokemonData
-    // pokemonImage: string | null;
+    pokemonType: { pokemon: FilterType[] }
 }
 
 type ImageData = {

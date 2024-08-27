@@ -14,8 +14,6 @@ const FavoriteComponent = ({pokemon}:IProps) => {
     console.log(pokemon.favorite.toString());
     const dispatch = useDispatch();
 
-    // const dispatch = useDispatch();
-
     // useEffect(() => {
     //     // dispatch(pokemons);
     // }, []);

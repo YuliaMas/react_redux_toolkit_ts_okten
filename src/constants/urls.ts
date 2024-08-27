@@ -8,6 +8,7 @@ const urls = {
         byName: (name: string) => baseUrl + '/pokemon/' + name,
         forms: "/pokemon-form",
         // formsById: (id) => {baseUrl + 'forms' + '/' + id}
+        type: (endpoint: string) => baseUrl + `/type/${endpoint}`,
     }
 }
 
