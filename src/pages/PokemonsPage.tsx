@@ -12,12 +12,12 @@ const PokemonsPage = () => {
 
     const counterPages = useAppSelector(state => state.pokemonSlice.pageNumber);
     const handlePrevious = () => {
-        dispatch(prevPage(offset-20));
+        dispatch(prevPage());
         return setOffset(prevState => offset >= 20 ? prevState - 20: offset);
     };
 
     const handleNext = () => {
-        dispatch(nextPage(offset+20));
+        dispatch(nextPage());
         return setOffset(prevState => prevState + 20);
     };
     useEffect(() => {

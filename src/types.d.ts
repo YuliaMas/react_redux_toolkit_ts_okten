@@ -162,7 +162,7 @@ export interface IPokemonForm {
 }
 
 export interface PokemonFormSprites {
-    front_default: string | null;
+    front_default?: string | undefined;
     front_female: string | null;
     front_shiny: string | null;
     front_shiny_female: string | null;

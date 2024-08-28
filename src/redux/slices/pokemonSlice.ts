@@ -1,13 +1,15 @@
-import {createSlice, isFulfilled, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, isFulfilled} from "@reduxjs/toolkit";
 import {
     getPokemons,
     loadPokemonById,
     loadPokemonByName,
-    loadPokemonByUrl, loadPokemonForm,
-    loadPokemons, loadPokemonsByAbility,
+    loadPokemonByUrl,
+    loadPokemonForm,
+    loadPokemons,
+    loadPokemonsByAbility,
     loadPokemonsByType
 } from "../reducers/loadPokemons";
-import {Name, NamedAPIResource, PokemonFormSprites, PokemonSliceType} from "../../types";
+import {PokemonSliceType} from "../../types";
 
 const pokemonInitState: PokemonSliceType = {
     pokemonsAll: {pokemonsAll: [], next: null , previous: null, count: 0,},
@@ -54,7 +56,7 @@ const pokemonInitState: PokemonSliceType = {
             name: '',
             url: ''},
         sprites: {
-            front_default: null,
+            front_default: '',
             front_female: null,
             front_shiny: null,
             front_shiny_female: null,
@@ -89,11 +91,11 @@ export const pokemonSlice = createSlice({
             }
             console.log(pokemonsAll?.favorite);
         },
-        prevPage:(state, action:PayloadAction<number>)=>{
+        prevPage:(state)=>{
             console.log(state.pageNumber);
             state.pageNumber = state.pageNumber-1;
         } ,
-        nextPage:(state, action:PayloadAction<number>)=>{
+        nextPage:(state)=>{
             console.log(state.pageNumber);
             state.pageNumber = state.pageNumber+1;
         }
@@ -131,8 +133,8 @@ export const pokemonSlice = createSlice({
                 console.log(state.pokemons);
                 state.pokemons = action.payload;
             })
-            .addCase(loadPokemons.rejected, (state, action) => {})
-            .addMatcher(isFulfilled(loadPokemons, loadPokemonById , loadPokemonByUrl, loadPokemonByName, loadPokemonForm, getPokemons, loadPokemonsByType, loadPokemonsByAbility) , (state, action) => {
+            // .addCase(loadPokemons.rejected, (state, action) => {})
+            .addMatcher(isFulfilled(loadPokemons, loadPokemonById , loadPokemonByUrl, loadPokemonByName, loadPokemonForm, getPokemons, loadPokemonsByType, loadPokemonsByAbility) , (state) => {
                 state.isLoaded = true;
             })
     }
