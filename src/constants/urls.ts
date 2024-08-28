@@ -7,7 +7,7 @@ const urls = {
         byId: (id: string) => baseUrl + '/pokemon/' + id,
         byName: (name: string) => baseUrl + '/pokemon/' + name,
         forms: "/pokemon-form",
-        // formsById: (id) => {baseUrl + 'forms' + '/' + id}
+        formsByName: (name:string) => baseUrl + '/pokemon-form/' + name,
         type: (endpoint: string) => baseUrl + `/type/${endpoint}`,
         ability: (endpoint: string) => baseUrl + `/ability/${endpoint}`,
     }

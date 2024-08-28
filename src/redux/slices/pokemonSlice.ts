@@ -3,12 +3,11 @@ import {
     getPokemons,
     loadPokemonById,
     loadPokemonByName,
-    loadPokemonByUrl,
+    loadPokemonByUrl, loadPokemonForm,
     loadPokemons, loadPokemonsByAbility,
     loadPokemonsByType
 } from "../reducers/loadPokemons";
-import {PokemonSliceType} from "../../types";
-// import {getPokemonData} from "../reducers/getPokemonData";
+import {Name, NamedAPIResource, PokemonFormSprites, PokemonSliceType} from "../../types";
 
 const pokemonInitState: PokemonSliceType = {
     pokemonsAll: {pokemonsAll: [], next: null , previous: null, count: 0,},
@@ -41,7 +40,36 @@ const pokemonInitState: PokemonSliceType = {
     count: 0,
     offset: 0,
     pokemonType: {pokemon: []},
-    pokemonAbility: {pokemon: []}
+    pokemonAbility: {pokemon: []},
+    pokemonForm: {
+        id: 0,
+        name: '',
+        order: 0,
+        form_order: 0,
+        is_default: false,
+        is_battle_only: false,
+        is_mega: false,
+        form_name: '',
+        pokemon: {
+            name: '',
+            url: ''},
+        sprites: {
+            front_default: null,
+            front_female: null,
+            front_shiny: null,
+            front_shiny_female: null,
+            back_default: null,
+            back_female: null,
+            back_shiny:  null,
+            back_shiny_female:  null,
+        },
+        version_group:  {
+            name: '',
+            url: ''},
+        names: [],
+        form_names: [],
+        types: []
+    }
 }
 export const pokemonSlice = createSlice({
     name: "pokemonSlice",
@@ -80,14 +108,13 @@ export const pokemonSlice = createSlice({
             .addCase(loadPokemonByUrl.fulfilled, (state, action) => {
                 state.pokemonImage = action.payload;
             })
+            .addCase(loadPokemonForm.fulfilled, (state, action) => {
+                state.pokemonForm= action.payload;
+            })
             .addCase(getPokemons.fulfilled, (state, action) => {
                 console.log(state.pokemonsAll);
                 state.pokemonsAll= action.payload;
             })
-            // .addCase(getPokemonData.fulfilled, (state, action) => {
-            //     console.log(state.pokemons);
-            //     state.pokemonImage = action.payload;
-            // })
             .addCase(loadPokemonByName.fulfilled, (state, action) => {
                 console.log(state.pokemonData);
                 state.pokemonData = action.payload;
@@ -105,7 +132,7 @@ export const pokemonSlice = createSlice({
                 state.pokemons = action.payload;
             })
             .addCase(loadPokemons.rejected, (state, action) => {})
-            .addMatcher(isFulfilled(loadPokemons, loadPokemonById , loadPokemonByUrl, loadPokemonByName, getPokemons, loadPokemonsByType, loadPokemonsByAbility) , (state, action) => {
+            .addMatcher(isFulfilled(loadPokemons, loadPokemonById , loadPokemonByUrl, loadPokemonByName, loadPokemonForm, getPokemons, loadPokemonsByType, loadPokemonsByAbility) , (state, action) => {
                 state.isLoaded = true;
             })
     }
@@ -118,9 +145,9 @@ export const pokemonActions = {
     loadPokemons,
     loadPokemonById,
     loadPokemonByUrl,
-    // getPokemonData,
     loadPokemonByName,
     getPokemons,
     loadPokemonsByType,
-    loadPokemonsByAbility
+    loadPokemonsByAbility,
+    loadPokemonForm
 };

@@ -22,9 +22,8 @@ const SearchComponent = () => {
                 e.preventDefault();
                 dispatch(loadPokemonByName(name.trim()));
             }}>
-
                 <input
-                    className="py-2 pl-10 md:pr-24 lg:pr-48  w-1/2 text-sm rounded-2xl bg-blue-400 text-gray-800 placeholder-gray-500 appearance-none focus:outline-none focus:font-medium focus:border-gray-900"
+                    className="py-2 pl-10 md:pr-24 lg:pr-48  w-1/2 text-sm rounded-2xl bg-blue-400 text-gray-800 placeholder-teal-200  appearance-none focus:outline-none focus:font-medium focus:border-gray-900"
                     placeholder={"Enter a pokemon name..."}
                     value={name}
                     onKeyPress={(e: React.KeyboardEvent) => {

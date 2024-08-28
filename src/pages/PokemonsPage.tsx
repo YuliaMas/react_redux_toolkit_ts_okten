@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "../redux/store";
 import {getPokemons} from "../redux/reducers/loadPokemons";
 import {nextPage, prevPage} from "../redux/slices/pokemonSlice";
 
-const FavPokemonsPage = () => {
+const PokemonsPage = () => {
     const {pokemonsAll,count, previous, next}= useAppSelector((state) => state.pokemonSlice);
     const dispatch = useAppDispatch();
     const [offset, setOffset] = useState(0);
@@ -30,23 +30,22 @@ const FavPokemonsPage = () => {
 
     return (
         <div>
-            FavPokemons Page
             <h3 key={totalFavorite}>Favorites : ❤ {totalFavorite}</h3>
             <div>
              <ul className={"grid grid-cols-5 gap-5"}>
                 {pokemonsAll?.pokemonsAll.map((pokemon) =>
                     (
-                                <li key={pokemon.id} className={"w-full flex flex-col border rounded text-center justify-center items-center"}>
-                                    <Link to={'pokemon/' + pokemon.name}>
-                                        <h2 className={"font-bold"}>{pokemon.name.toUpperCase()}</h2>
-                                        <img className={"w-[150px] height-[150px]"}
-                                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-                                            alt={pokemon.name}/>
-                                    </Link>
-                                    <div className="p-1" key={pokemon.id}>
-                                        <FavoriteComponent pokemon={pokemon}/>
-                                    </div>
-                                </li>
+                        <li key={pokemon.id} className={"w-full flex flex-col border rounded text-center justify-center items-center"}>
+                            <Link to={'pokemon/' + pokemon.name}>
+                                <h2 className={"font-bold"}>{pokemon.name.toUpperCase()}</h2>
+                                <img className={"w-[150px] height-[150px]"}
+                                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                                     alt={pokemon.name}/>
+                            </Link>
+                            <div className="p-1" key={pokemon.id}>
+                                <FavoriteComponent pokemon={pokemon}/>
+                            </div>
+                        </li>
                     ))
                 }
                 </ul>
@@ -66,4 +65,4 @@ const FavPokemonsPage = () => {
     )
 };
 
-export default FavPokemonsPage;
+export default PokemonsPage;

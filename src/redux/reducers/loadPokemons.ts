@@ -56,6 +56,18 @@ export const  loadPokemonByUrl = createAsyncThunk(
         }
     }
 );
+export const  loadPokemonForm = createAsyncThunk(
+    'pokemonSlice/loadPokemonForm',
+    async (name:string , thunkAPI) => {
+        try {
+            const pokemonForm = await pokemonService.getPokemonForm(name);
+            return thunkAPI.fulfillWithValue(pokemonForm);
+        } catch (e) {
+            const error = e as AxiosError;
+            return thunkAPI.rejectWithValue(error.response);
+        }
+    }
+);
 
 export const getPokemons = createAsyncThunk(
     'pokemonSlice/getPokemons', async (offset:number, thunkAPI) => {
